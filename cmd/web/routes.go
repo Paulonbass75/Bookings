@@ -21,6 +21,9 @@ mux.Get("/", handlers.Repo.Home)
 mux.Get("/about", handlers.Repo.About)
 mux.Get("/contact", handlers.Repo.Contact)
 
+fileServer := http.FileServer(http.Dir("./static/"))
+mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
+
 	return mux
 }
 
